@@ -8,6 +8,7 @@ class Game
 private:
 	Display yDisp;
 	bool isRunning = false;
+	int oldTime = 0;
 public:
 	void Init(); //Init SDL services and set window and render
 	void ProcessInput();

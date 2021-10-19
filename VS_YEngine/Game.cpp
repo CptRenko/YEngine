@@ -11,9 +11,20 @@ void Game::Run()
 {
 	while (isRunning)
 	{
+		Uint32 timeToWait = TIME_TARGET - (SDL_GetTicks() - oldTime);
+
+		if (timeToWait >= 0 && timeToWait <= TIME_TARGET)
+		{
+			SDL_Delay(timeToWait);
+		}
+
 		ProcessInput();
 		yDisp.Render();
 		Update();
+
+		oldTime = SDL_GetTicks();
+
+		std::cout << timeToWait << std::endl;
 	}
 }
 

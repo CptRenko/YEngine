@@ -30,6 +30,25 @@ void Display::Init()
 	colorTexture = SDL_CreateTexture(render, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, WIN_WIDTH, WIN_HEIGHT);
 }
 
+vec2_t Display::Project(vec3_t v)
+{
+	vec2_t vecProjected = { 0.0f ,0.0f };
+#if USE_PERSPECTIVE
+	//@TODO: I still need implement to a matrix projection
+	//Perspective works with a frustrum; things more far are showing more little and things more close to the camera are show more big. 
+	std::cout << "Uso perspectiva" << std::endl;
+	vecProjected.x = v.x / v.z;
+	vecProjected.y = v.y / v.z;
+
+#elif USE_ORTHOGONAL
+	std::cout << "Uso ortoghonal" << std::endl;
+	vecProjected.x = v.x;
+	vecProjected.y = v.y;
+#endif
+
+	return vecProjected;
+}
+
 void Display::DrawPixel(int _x, int _y, uint32_t color)
 {
 	//Check if the coordinates it's in the screen.
