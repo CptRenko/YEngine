@@ -32,6 +32,11 @@ void Display::Init()
 
 vec2_t Display::Project(vec3_t v)
 {
+
+#if USE_PERSPECTIVE & USE_ORTHOGONAL
+	#error No se puede usar USE_PERSPECTIVE Y USE_ORTHOGONAL al mismo tiempo;
+#endif
+	
 	vec2_t vecProjected = { 0.0f ,0.0f };
 #if USE_PERSPECTIVE
 	//@TODO: I still need implement to a matrix projection
@@ -94,7 +99,7 @@ void Display::ResetColorBuffer(uint32_t color)
 
 void Display::Render()
 {
-	DrawRect(HALF_SCREEN_X - 50, HALF_SCREEN_Y - 50, 50, 50, 0xFFFF0000); // Apply a offset from the half of the screenn
+	//DrawRect(HALF_SCREEN_X - 50, HALF_SCREEN_Y - 50, 50, 50, 0xFFFF0000); // Apply a offset from the half of the screenn
 
 	RenderColorBuffer();
 	ResetColorBuffer(0x00000000);
